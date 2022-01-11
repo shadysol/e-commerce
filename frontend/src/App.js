@@ -18,6 +18,15 @@ import UserEditScreen from './screens/userEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import styled from 'styled-components';
+
+const MarginContainer = styled.div`
+margin-top: 0%;  
+margin-left: 5%;
+margin-right: 5%;
+padding-left: 2%;
+padding-right: 2%;
+`;
 
 
 function App() {
@@ -27,7 +36,7 @@ function App() {
     <BrowserRouter>
     <Header />
     <main className='py-3'>
-    <Container>
+    <MarginContainer>
       <Routes>
       
     <Route exact path="/" element={<HomeScreen/>} />
@@ -53,7 +62,7 @@ function App() {
 
     </Routes>
       
-   </Container>
+    </MarginContainer>
    </main>
    <Footer />
    </BrowserRouter>
