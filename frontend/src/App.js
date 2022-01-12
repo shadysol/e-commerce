@@ -1,4 +1,5 @@
 import Header from './components/Header'
+import SubHeader from './components/SubHeader'
 import Footer from './components/Footer'
 import React from 'react';
 import {Container} from 'react-bootstrap'
@@ -35,6 +36,7 @@ function App() {
 
     <BrowserRouter>
     <Header />
+    <SubHeader />
     <main className='py-3'>
     <MarginContainer>
       <Routes>
