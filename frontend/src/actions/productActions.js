@@ -16,11 +16,14 @@ import {
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
   PRODUCT_CREATE_REVIEW_REQUEST,
-    PRODUCT_CREATE_REVIEW_SUCCESS,
-    PRODUCT_CREATE_REVIEW_FAIL,
-    PRODUCT_TOP_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_CREATE_REVIEW_FAIL,
+  PRODUCT_TOP_REQUEST,
   PRODUCT_TOP_SUCCESS,
   PRODUCT_TOP_FAIL,
+  PRODUCT_FILTERED_SUCCESS,
+  PRODUCT_FILTERED_REQUEST,
+  PRODUCT_FILTERED_FAIL,
 } from '../constants/productConstants'
 
 import { logout } from './userActions'
@@ -64,6 +67,27 @@ export const listProductDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
+  }
+}
+
+export const filteredProducts = (category) => async (dispatch) => {
+  try {
+    dispatch({ type: PRODUCT_FILTERED_REQUEST })
+
+    const { data } = await axios.get(`/api/products/${category}`)
+
+    dispatch({
+      type: PRODUCT_FILTERED_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_FILTERED_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

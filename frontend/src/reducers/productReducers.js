@@ -23,6 +23,9 @@ import {
     PRODUCT_TOP_REQUEST,
     PRODUCT_TOP_SUCCESS,
     PRODUCT_TOP_FAIL,
+    PRODUCT_FILTERED_SUCCESS,
+    PRODUCT_FILTERED_REQUEST,
+    PRODUCT_FILTERED_FAIL,
   } from '../constants/productConstants.js'
   
   export const productListReducer = (state = { products: [] }, action) => {
@@ -42,6 +45,23 @@ import {
         return state
     }
   }
+
+  export const productFilteredReducer = (state = { products: [] }, action) => {
+    switch (action.type) {
+      case PRODUCT_FILTERED_REQUEST:
+        return { loading: true, products: [] }
+      case PRODUCT_FILTERED_SUCCESS:
+        return {
+          loading: false,
+          products: action.payload
+        }
+      case PRODUCT_FILTERED_FAIL:
+        return { loading: false, error: action.payload }
+      default:
+        return state
+    }
+  }
+
 
   export const productDetailsReducer = (
     state = { product: { reviews: [] } },
