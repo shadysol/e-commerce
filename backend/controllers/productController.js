@@ -5,7 +5,7 @@ import Product from '../Models/productModel.js'
 // @route   GET /api/products
 // @access  Public
 const getProducts = asyncHandler(async (req, res) => {
-    const pageSize = 4
+    const pageSize = 8
     const page = Number(req.query.pageNumber) || 1
   
     const keyword = req.query.keyword
@@ -39,6 +39,29 @@ const getProductById = asyncHandler(async (req, res) => {
         throw new Error ('Product Not Found')
     }
 })
+
+
+
+
+// @desc    Fetch products by category 
+// @route   GET /api/products/:category
+// @access  Public
+const getProductsByCategory = asyncHandler(async (req, res, next) => {
+
+ const Productcategory = req.params.category
+
+ if (Productcategory === "Headphones" || Productcategory === "Cellphones" || Productcategory === "Tablet") {
+  const products = await Product.find({category: Productcategory})
+  res.json(products)
+ }
+ else {
+ // res.status(404)
+ // throw new Error ('Product Not Found')
+ next()
+}
+})
+
+
 
 
 // @desc    Delete a product
@@ -161,6 +184,16 @@ const getTopProducts = asyncHandler(async (req, res) => {
     
   })
 
+   // @desc    Get Phones
+// @route   GET /api/products/phones
+// @access  Public
+const getPhones = asyncHandler(async (req, res) => {
+  const products = await Product.find({category: 'Cellphones'})
+
+  res.json(products)
+  
+})
+
 
 export {
     getProducts,
@@ -170,6 +203,6 @@ export {
     updateProduct,
     createProductReview,
     getTopProducts,
-   
+   getProductsByCategory,
   }
 

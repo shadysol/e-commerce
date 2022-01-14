@@ -19,6 +19,7 @@ import UserEditScreen from './screens/userEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
 import OrderListScreen from './screens/OrderListScreen';
+import ProductCategoryScreen from './screens/ProductCategoryScreen.js';
 import styled from 'styled-components';
 
 const MarginContainer = styled.div`
@@ -45,7 +46,8 @@ function App() {
     <Route path='/login' element={<LoginScreen/>} />
     <Route exact path="/product/:id" element={<ProductScreen/>} />
     <Route exact path='/cart/:id' element={<CartScreen/>} />
-    <Route exact path='/cart' element={<CartScreen/>} />
+    <Route exact path='/products/cart' element={<CartScreen/>} />
+    <Route  path='/products/:category' element={<ProductCategoryScreen/>} />
     <Route path='/register' element={<RegisterScreen/>} />
     <Route path='/profile' element={<ProfileScreen/>} />
     <Route path='login/shipping' element={<ShippingScreen/>} />
