@@ -54,7 +54,7 @@ const Header = () => {
             
             <Navbar.Brand >
             <Brand>
-            PROSHOP
+            PhoneShop
               </Brand>
               </Navbar.Brand>
             
