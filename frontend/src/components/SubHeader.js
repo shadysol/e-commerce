@@ -54,19 +54,19 @@ const SubHeader = () => {
 
     return !screenWidth ? (
         <SubNavBar>
-            <SubLink to="/products/Cellphones" style={{textDecoration: 'none'}}>
+            <SubLink to="/products/Cellphones" onClick={() => window.reload()} style={{textDecoration: 'none'}}>
                 <NavItem>
                     <i className="fas fa-mobile-alt" style={{ marginRight: '0.5rem' }}></i>
                     Phones
                 </NavItem>
             </SubLink>
-            <SubLink to="/products/Headphones" style={{textDecoration: 'none'}}>
+            <SubLink to="/products/Headphones" onClick={() => window.reload()} style={{textDecoration: 'none'}}>
                 <NavItem>
                     <i className="fas fa-headphones" style={{ marginRight: '0.5rem' }}></i>
                     HeadPhones
                 </NavItem>
             </SubLink>
-            <SubLink to="/products/Tablet" style={{textDecoration: 'none'}}>
+            <SubLink to="/products/Tablet" onClick={() => window.reload()} style={{textDecoration: 'none'}}>
                 <NavItem >
                     <i className="fas fa-tablet-alt" style={{ marginRight: '0.5rem' }}></i>
                     Tablets

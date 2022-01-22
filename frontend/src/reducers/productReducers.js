@@ -46,14 +46,14 @@ import {
     }
   }
 
-  export const productFilteredReducer = (state = { products: [] }, action) => {
+  export const productFilteredReducer = (state = { filterproducts: [] }, action) => {
     switch (action.type) {
       case PRODUCT_FILTERED_REQUEST:
-        return { loading: true, products: [] }
+        return { loading: true, filterproducts: [] }
       case PRODUCT_FILTERED_SUCCESS:
         return {
           loading: false,
-          products: action.payload
+          filterproducts: action.payload
         }
       case PRODUCT_FILTERED_FAIL:
         return { loading: false, error: action.payload }
