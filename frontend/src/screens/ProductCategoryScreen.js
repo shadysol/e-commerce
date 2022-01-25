@@ -14,7 +14,12 @@ import { filteredProducts } from '../actions/productActions' //replace with filt
 const ProductCategoryScreen = () => {
 //  const {keyword} = useParams()
 
+
 const [products, setProducts] = useState([])
+
+const [sortedProducts, setSortedProducts] = useState([])
+
+const [sortBy, setSortBy] = useState("")
 
 const {category} = useParams() 
 
@@ -25,6 +30,7 @@ const {category} = useParams()
 
   useEffect(() => {
     setProducts([])
+   
     dispatch(filteredProducts(category))             // dispatch the action
   }, [dispatch, category])
 
@@ -49,6 +55,41 @@ const brandFilterProducts = filterproducts.filter(product=>product.brand===brand
     dispatch(filteredProducts(category))
   }
 })
+
+useEffect(() => {
+  setSortBy('')
+    setSortedProducts([])
+ 
+  if (sortBy.length &&  products.length){
+ setSortedProducts(
+    sortBy === "Ascending" ? 
+ 
+    products.sort((a,b) =>  (a.price > b.price ? 1 : -1))
+
+    : 
+    products.sort((a,b) =>  (a.price > b.price ? -1 : 1))
+ )
+   }
+
+   else if (sortBy.length){
+setSortedProducts(
+    sortBy === "Ascending" ? 
+    filterproducts.sort((a,b) =>  (a.price > b.price ? 1 : -1))
+
+    : 
+    filterproducts.sort((a,b) =>  (a.price > b.price ? -1 : 1))
+)
+   }
+   else if (!sortBy.length){
+    
+    setSortedProducts([])
+    
+   
+
+   }
+  
+  }
+, [sortBy])
 
 
 
@@ -76,10 +117,10 @@ const brandFilterProducts = filterproducts.filter(product=>product.brand===brand
        
         </Col>
         <Col xs={3}>
-        <Form.Select  label="Price">
+        <Form.Select  label="Price" onChange={(e) => setSortBy(e.target.value)}>
         <option value="">Price</option>
-        <option value="">Highest to Lowest</option>
-        <option value="">Lowest to Highest</option>
+        <option value="Descending">Highest to Lowest</option>
+        <option value="Ascending">Lowest to Highest</option>
         </Form.Select>
         
         </Col>
@@ -106,6 +147,16 @@ const brandFilterProducts = filterproducts.filter(product=>product.brand===brand
         <>
         { products[0]==="empty"  ?
         <Message variant='danger'>Product not found</Message>
+
+        : sortedProducts.length?
+        <Row>
+          {sortedProducts.map((product) => (
+            <Col key={product._id} sm={12} md={6} lg={6} xl={4} >
+              <Product product={product} />
+            </Col>
+          ))}
+        </Row>
+
 : products.length ?
           <Row>
             {products.map((product) => (
@@ -114,7 +165,8 @@ const brandFilterProducts = filterproducts.filter(product=>product.brand===brand
               </Col>
             ))}
           </Row>
-:
+
+          : 
           <Row>
             {filterproducts.map((product) => (
               <Col key={product._id} sm={12} md={6} lg={6} xl={4} >
